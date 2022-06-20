@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyCartAndroid</string>
+    <string name="criar_nova_lista_de_compra">Criar Nova Lista de Compra</string>
+    <string name="confirmar_e_criar">Confirmar e Criar</string>
+    <string name="listas_criadas">Listas Criadas</string>
+    <string name="criar_nova_lista">Criar Nova Lista</string>
+    <string name="valor">Valor:</string>
+    <string name="confirmar_edi_o">Confirmar Edição</string>
+</resources>
