@@ -1,5 +1,7 @@
 package com.example.mycartandroid;
 
+import static com.example.mycartandroid.Databases.DBMain.TABLENAME;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,17 +30,15 @@ ImageButton criarNovaLista;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listas_criadas);
-
-        modelArrayList = new ArrayList<>();
         dbMain = new DBMain(this);
 
-        findid();
+        modelArrayList = new ArrayList<>();
 
-        modelArrayList = displayListas();
-        adapterLista = new AdapterLista(modelArrayList,ListasCriadas.this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ListasCriadas.this,RecyclerView.VERTICAL,false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapterLista);
+
+        findid();
+        displayListas();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         //Btn p/ tela de criacao de listas
         criarNovaLista.setOnClickListener(new View.OnClickListener() {
@@ -64,14 +64,16 @@ ImageButton criarNovaLista;
 
     private ArrayList<Model> displayListas() {
         sqLiteDatabase = dbMain.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM listaCompra",null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLENAME+"",null);
         ArrayList<Model>modelArrayList = new ArrayList<>();
-        if (cursor.moveToFirst()){
-            do{
-                modelArrayList.add(new Model(cursor.getString(1)));
-            }while(cursor.moveToNext());
+        while (cursor.moveToNext()){
+            int idLista = cursor.getInt(0);
+            String nomeLista = cursor.getString(1);
+            modelArrayList.add(new Model(idLista, nomeLista));
         }
         cursor.close();
+        adapterLista=new AdapterLista(this, R.layout.card_view_lista,modelArrayList,sqLiteDatabase);
+        recyclerView.setAdapter(adapterLista);
         return modelArrayList;
     }
 

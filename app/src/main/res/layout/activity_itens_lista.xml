@@ -6,4 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".ItensLista">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ItensLista">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp">
+
+            <TextView
+                android:id="@+id/txt_nomeListaItens"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/txtV_adicionarItem"
+                android:layout_width="147dp"
+                android:layout_height="match_parent"
+                android:drawableRight="@drawable/ic_baseline_add_24"
+                android:gravity="center"
+                android:text="Adicionar Item"
+                android:textColor="#00C617"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_itensLista"
+            android:layout_width="wrap_content"
+            android:layout_height="500dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="59dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="90dp" />
+
+        <TextView
+            android:id="@+id/txtV_valorTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="22dp"
+            android:gravity="center"
+            android:text="Total:"
+            android:textSize="24sp" />
+
+
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

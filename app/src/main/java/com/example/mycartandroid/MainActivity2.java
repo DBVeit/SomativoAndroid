@@ -6,9 +6,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.example.mycartandroid.Databases.DBItens;
+import com.example.mycartandroid.Databases.DBMain;
 
 public class MainActivity2 extends AppCompatActivity {
-DBItens dbItens;
+DBMain dbMain;
 SQLiteDatabase sqLiteDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

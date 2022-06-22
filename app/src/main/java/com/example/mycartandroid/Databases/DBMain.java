@@ -11,20 +11,21 @@ public class DBMain extends SQLiteOpenHelper {
     public static final String DBNAME = "myCartShop";
     public static final String TABLENAME = "listaCompra";
     public static final int VER = 1;
-
+    String query;
     public DBMain(@Nullable Context context) {
         super(context, DBNAME, null, VER);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE "+TABLENAME+"(idLista INTEGER PRIMARY KEY AUTOINCREMENT, nomeLista TEXT, dataLista DATE)";
+        query = "CREATE TABLE "+TABLENAME+"(idLista INTEGER PRIMARY KEY AUTOINCREMENT, nomeLista TEXT, idAgrup INTEGER, idItem INTEGER UNIQUE, nomeItem TEXT, qtdItem INTEGER, valorItem REAL, checkItem INTEGER)";
         db.execSQL(query);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        String query="DROP TABLE IF EXISTS "+TABLENAME+"";
+        query="DROP TABLE IF EXISTS "+TABLENAME+"";
         db.execSQL(query);
+        onCreate(db);
     }
 }

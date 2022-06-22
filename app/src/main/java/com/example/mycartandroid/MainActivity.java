@@ -1,5 +1,7 @@
 package com.example.mycartandroid;
 
+import static com.example.mycartandroid.Databases.DBMain.TABLENAME;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -34,9 +36,10 @@ int idLista = 0;
         editarDados();
     }
 
+    //Retornar ao main activity usando o id passado pelo adapter
     private void editarDados(){
-        if(getIntent().getBundleExtra("listaDados")!=null){
-            Bundle bundle = getIntent().getBundleExtra("listaDados");
+        if(getIntent().getBundleExtra("dadosLista")!=null){
+            Bundle bundle = getIntent().getBundleExtra("dadosLista");
             idLista=bundle.getInt("idLista");
             nomeLista.setText(bundle.getString("nomeLista"));
 
@@ -59,6 +62,7 @@ int idLista = 0;
             public void onClick(View view) {
                 ContentValues cv = new ContentValues();
                 cv.put("nomeLista",nomeLista.getText().toString());
+
                 sqLiteDatabase=dbMain.getReadableDatabase();
 
                 Long recinsert=sqLiteDatabase.insert("listaCompra", null, cv);
@@ -85,14 +89,14 @@ int idLista = 0;
             public void onClick(View v) {
                 ContentValues cv = new ContentValues();
                 cv.put("nomeLista",nomeLista.getText().toString());
-                sqLiteDatabase=dbMain.getReadableDatabase();
 
-                long recupdate=sqLiteDatabase.update("listaCompra",cv,"idLista"+idLista,null);
+                sqLiteDatabase=dbMain.getReadableDatabase();
+                long recupdate=sqLiteDatabase.update(TABLENAME,cv,"idLista="+idLista,null);
                 if (recupdate!=-1){
                     Toast.makeText(MainActivity.this, "Lista alterada!", Toast.LENGTH_SHORT).show();
                     criarLista.setVisibility(View.VISIBLE);
                     editarLista.setVisibility(View.GONE);
-                    limparDados();
+                    //limparDados();
                 }else{
                     Toast.makeText(MainActivity.this, "Erro ao alterar lista!", Toast.LENGTH_SHORT).show();
                 }
